@@ -11,6 +11,8 @@ import Blog from './Components/Blog/Blog.jsx';
 import User from './Components/Users/User.jsx';
 import User2 from './Components/User2/User2.jsx';
 import UserDetails from './Components/UserDetails/UserDetails.jsx';
+import Posts from './Components/Posts/Posts.jsx';
+import PostDetails from './Components/PostDetails/PostDetails.jsx';
 
 
 const useProms = fetch('https://jsonplaceholder.typicode.com/users')
@@ -37,6 +39,13 @@ const router = createBrowserRouter([
         </Suspense>
       },
       {
+        path:"posts",
+        loader: () => fetch('https://jsonplaceholder.typicode.com/posts'),
+        Component:Posts,
+      },
+
+      // =======dynamic router======
+      {
         path:"user/:userId",
         // loader:({params}) => {
         //   console.log("params insite the loader", params.userId);
@@ -44,9 +53,13 @@ const router = createBrowserRouter([
         // },
 
         loader:({params}) =>
-          fetch(`https://jsonplaceholder.typicode.com/users/${params.userId}`),
-      
+          fetch(`https://jsonplaceholder.typicode.com/users/${params.userId}`), 
         Component:UserDetails,
+      },
+      {
+        path:'post/:postId',
+        loader:({params}) => fetch(`https://jsonplaceholder.typicode.com/posts/${params.postId}`),
+        Component:PostDetails,
       }
     
 
