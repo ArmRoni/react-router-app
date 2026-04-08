@@ -1,9 +1,15 @@
 import React from 'react';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 
 const PostDetails = () => {
 
     const post = useLoaderData();
+
+    const navigate = useNavigate();
+
+    const hadleBackCliek = () => {
+        navigate(-1)
+    }
     
     console.log(post);
     const {id, title, body} = post;
@@ -12,6 +18,8 @@ const PostDetails = () => {
            <h1>{id} </h1>
            <p>{title}</p>
            <p>{body}</p>
+
+           <button onClick={hadleBackCliek}> Go Back </button>
         </div>
     );
 };
